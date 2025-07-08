@@ -1,0 +1,26 @@
+{
+  "version": "2.0.0",
+  "tasks": [
+    {
+      "label": "build",
+      "type": "shell",
+      "command": "g++",
+      "args": [
+        "-Wall",
+        "-Wextra",
+        "-Wimplicit-fallthrough",
+        "-Wundef",
+        "-g",               // Include debug info
+        "main.cpp",         // Change to your source file(s)
+        "-o",
+        "main.out"             // Output binary
+      ],
+      "group": {
+        "kind": "build",
+        "isDefault": true
+      },
+      "problemMatcher": ["$gcc"],
+      "detail": "Compile C++ using g++"
+    }
+  ]
+}
