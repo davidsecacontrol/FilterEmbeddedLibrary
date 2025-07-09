@@ -74,7 +74,7 @@ private:
 template <typename Type, unsigned int N>
 void Filter<Type, N>::setCoeffs(float const *const numerator, float const *const denominator)
 {
-  // If b[0] = 0, the filter coefffs are incorrect.
+  // If b[0] = 0, the filter coefficients are incorrect.
   assert(denominator[0] != 0);
 
   // Store the inputs
@@ -82,8 +82,9 @@ void Filter<Type, N>::setCoeffs(float const *const numerator, float const *const
   CopyArray(this->denominator, denominator, N);
 
   // Solve for y(z) by normalizing filter coefficients (required b[0] = 1)
+  DivideArrayElements(this->numerator  ,N, this->denominator[0]);
   DivideArrayElements(this->denominator,N, this->denominator[0]);
-
+  
 
 
 }

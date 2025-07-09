@@ -15,6 +15,7 @@ Type DotProduct(Type const *const vec1, Type const *const vec2, const unsigned i
   return result;
 }
 
+// Initializes array[0] = 0
 template <typename Type>
 void AdvanceArray(Type *const array, const unsigned int size)
 {
