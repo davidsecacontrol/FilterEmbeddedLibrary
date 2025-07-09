@@ -1,5 +1,7 @@
 #pragma once
 
+#include <cassert>
+
 template <typename Type>
 Type DotProduct(Type const *const vec1, Type const *const vec2, const unsigned int size)
 {
@@ -31,5 +33,16 @@ void CopyArray(Type *const destination, Type const *const source, unsigned int s
   for (unsigned int i = 0; i < size; i++)
   {
     destination[i] = source[i];
+  }
+}
+
+template <typename Type>
+void DivideArrayElements(Type *const array, unsigned int size, Type divisor)
+{
+  assert(divisor != 0);
+
+  for (unsigned int i = 0; i < size; i++)
+  {
+    array[i] /= divisor;
   }
 }
