@@ -13,7 +13,7 @@
         "-g",               // Include debug info
         "main.cpp",         // Change to your source file(s)
         "-o",
-        "main.out"             // Output binary
+        "main.exe"             // Output binary
       ],
       "group": {
         "kind": "build",
@@ -21,6 +21,27 @@
       },
       "problemMatcher": ["$gcc"],
       "detail": "Compile C++ using g++"
+    },
+    {
+      "label": "build_out",
+      "type": "shell",
+      "command": "g++",
+      "args": [
+        "-Wall",
+        "-Wextra",
+        "-Wimplicit-fallthrough",
+        "-Wundef",
+        "-g",               // Include debug info
+        "main.cpp",         // Change to your source file(s)
+        "-o",
+        "main.out"             // Output binary
+      ],
+      "group": {
+        "kind": "build",
+        "isDefault": true
+      },
+      "problemMatcher": ["$gcc"],
+      "detail": "Compile C++ using g++ for debugger (main.out)"
     }
   ]
 }
