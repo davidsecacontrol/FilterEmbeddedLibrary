@@ -1,2 +1,3 @@
-main.out
-main.exe
+*.out
+*.exe
+docs/

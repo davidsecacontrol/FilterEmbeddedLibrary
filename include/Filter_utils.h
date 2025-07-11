@@ -4,9 +4,9 @@
  * @brief Compialtion of useful, statically allocated, STL-free functions.
  * @version 0.1
  * @date 2025-07-11
- * 
+ *
  * @copyright Copyright (c) 2025
- * 
+ *
  */
 #pragma once
 
@@ -14,7 +14,7 @@
 
 /**
  * @brief Computes the dot product of two vectors of length \p size
- * 
+ *
  * @tparam Must implement operator+=(Type), operator*(Type), =0 initialization.
  * @param vec1 First array to multiply
  * @param vec2 Second array to multiply
@@ -36,7 +36,7 @@ Type DotProduct(Type const *const vec1, Type const *const vec2, const unsigned i
 
 /**
  * @brief Moves the elements in \p array from index k to k+1 up until \p size. \p array [0] initialized to zero
- * 
+ *
  * @tparam Type Must implement operator=(Type) and =0 initialization
  * @param array Array to advance
  * @param size  Size of \p array
@@ -53,10 +53,9 @@ void AdvanceArray(Type *const array, const unsigned int size)
   array[0] = 0;
 }
 
-
 /**
  * @brief Makes a copy of the first \p size elements of \p source at \p destination. User must ensure memory safety
- * 
+ *
  * @tparam Type Must implement operator=(Type)
  * @param destination Array to copy into
  * @param source Array to be copied
@@ -72,10 +71,9 @@ void CopyArray(Type *const destination, Type const *const source, unsigned int s
   }
 }
 
-
 /**
  * @brief Divides all elements of \p array up to index \p size by \p divisor
- * 
+ *
  * @tparam Type Must implement operator!=(int), operator/=(Type)
  * @param array Array to be divided
  * @param size Size of \p array

@@ -28,13 +28,11 @@ class Filter
 {
 
 public:
-
   /// @cond
   float numerator[N] = {};
   float denominator[N] = {};
   /// @endcond
 
-  
   void SetCoefficients(float const *const numerator, float const *const denominator);
 
   void SetCoefficientsFromZTransform(float const *const numerator, float const *const denominator);
@@ -45,7 +43,6 @@ private:
   Type input[N] = {};  // x[n]
   Type output[N] = {}; // y[n]
 };
-
 
 // Class function definitions (required in same file by templates) ------------------------------------------------------------
 

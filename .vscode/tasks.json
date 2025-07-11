@@ -10,8 +10,9 @@
         "-Wextra",
         "-Wimplicit-fallthrough",
         "-Wundef",
+        "-I./include",
         "-g",               // Include debug info
-        "main.cpp",         // Change to your source file(s)
+        "examples/example1_Moving_average.cpp",         // Change to your source file(s)
         "-o",
         "main.exe"             // Output binary
       ],
@@ -31,8 +32,9 @@
         "-Wextra",
         "-Wimplicit-fallthrough",
         "-Wundef",
+        "-I./include",
         "-g",               // Include debug info
-        "main.cpp",         // Change to your source file(s)
+        "examples/example1_Moving_average.cpp",         // Change to your source file(s)
         "-o",
         "main.out"             // Output binary
       ],
