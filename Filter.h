@@ -1,39 +1,13 @@
-/* ***************************************************
-**     Filtering library
-**     Author: David Secades
-**     Easy to use API to create all kinds of filters
-**
-**   - Statically allocated
-**   - STL - independent
-**   - Customizable data type & filter size
-**
-** -------------------------------------------------------------
-**
-**     Implements digital filters of the type:
-**
-**       y[n] =  a[0]*x[n] + a[1]*x[n-1] + ... + a[N-1]*x[n-(N-1)]
-**                  + b[1]*y[n-1] + b[2]*y[n-2] + ... + b[N-1]*y[n-(N-1)]
-**
-**      with SetCoefficients(a,b) 
-**
-**      or:
-**
-**          y(z)       a[0] + a[1]*z + ... + a[N-1]*z^(N-1)
-**        --------- = ------------------------------------------
-**          x(z)       b[0] + b[1]*z + ... + b[N-1]*z^(N-1)
-**
-**     with SetCoefficientsFromZTransform(a,b)
-**
-**
-**
-**     Where:
-**        numerator[n] <-> a[n]
-**        denominator[n] <-> b[n]
-**
-**
-**
-*******************************************************
-*/
+/**
+ * @file Filter.h
+ * @author David Secades - davidsecacontrol@gmail.com
+ * @brief Statically - allocated library for FIR & IIR filters with customizable filter size & data type
+ * @version 0.2
+ * @date 2025-07-11
+ *
+ * @copyright Copyright (c) 2025
+ *
+ */
 
 #pragma once
 
@@ -41,19 +15,30 @@
 
 #include "Filter_utils.h"
 
+/**
+ * @brief Main filter class.
+ *
+ * @tparam Type Filter input data type
+ * @tparam N Filter length
+ *
+ * @note Template is statically allocated. For run-time filter creating, use explicit template instantiation.
+ */
 template <typename Type, unsigned int N>
 class Filter
 {
 
 public:
-  float numerator[N] = {};   // a[]        where a[0] <-> x[n]
-  float denominator[N] = {}; // b[]      where b[0] = 1 <-> y[n]
 
+  /// @cond
+  float numerator[N] = {};
+  float denominator[N] = {};
+  /// @endcond
+
+  
   void SetCoefficients(float const *const numerator, float const *const denominator);
-  // Computes filter coefficients from z transform
+
   void SetCoefficientsFromZTransform(float const *const numerator, float const *const denominator);
 
-  // Compute next filter respose
   Type Update(const Type new_value);
 
 private:
@@ -61,8 +46,18 @@ private:
   Type output[N] = {}; // y[n]
 };
 
-// Filter definitions ----------------------------------------------------------------------
 
+// Class function definitions (required in same file by templates) ------------------------------------------------------------
+
+/**
+ * @brief Copies directly the provided arrays as coefifcients of the difference equation
+ *
+ * @note Notice that b[0] is ignored in the computation.
+ * @param numerator Filter input coefficients \f$a[k]\quad :\quad  y[n] = \sum_{k=0}^{N}a[k]*x[n-k] + \dots\f$
+ * @param denominator Filter output coefficients \f$b[k]\quad :\quad y[n] = \dots + \sum_{k=1}^{N}b[k]*y[n-k]\f$
+ *
+ *
+ */
 template <typename Type, unsigned int N>
 void Filter<Type, N>::SetCoefficients(float const *const numerator, float const *const denominator)
 {
@@ -72,6 +67,12 @@ void Filter<Type, N>::SetCoefficients(float const *const numerator, float const 
   CopyArray(this->denominator, denominator, N);
 }
 
+/**
+ * @brief Computes the filter coefficients from a z transform representation \f$ \frac{\sum_{k=0}^{N}a[k]*z^k}{\sum_{k=0}^{N}b[k]*z^k} \f$
+ *
+ * @param numerator Z transform numerator \f$a[k]\f$
+ * @param denominator Z transofrm denominator \f$b[k]\f$
+ */
 template <typename Type, unsigned int N>
 void Filter<Type, N>::SetCoefficientsFromZTransform(float const *const numerator, float const *const denominator)
 {
@@ -93,6 +94,12 @@ void Filter<Type, N>::SetCoefficientsFromZTransform(float const *const numerator
   }
 }
 
+/**
+ * @brief Evaluates the difference equation to obtain the next output.
+ *
+ * @param new_value New filter input
+ * @return Type New filter output
+ */
 template <typename Type, unsigned int N>
 Type Filter<Type, N>::Update(const Type new_value)
 {

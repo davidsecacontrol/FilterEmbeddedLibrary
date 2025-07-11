@@ -1,15 +1,33 @@
+/**
+ * @file main.cpp
+ * @author David Secades (davidsecacontrol@gmail.com)
+ * @brief Example 1: Moving average filter with user input
+ * @version 0.1
+ * @date 2025-07-10
+ * 
+ * @copyright Copyright (c) 2025
+ * 
+ */
+
 #include <iostream>
 #include "Filter.h"
 
-constexpr unsigned int FILTER_SIZE = 5;
 
-Filter<float, FILTER_SIZE> moving_average;
 
+/**
+ * @brief Example 1: Moving average with user input
+ * 
+ * @return int 
+ */
 int main()
 {
     float num[] = {0.2, 0.2, 0.2, 0.2, 0.2};
     float den[] = {1, 0, 0, 0, 0};
+
+    constexpr unsigned int FILTER_SIZE = 5;
+    Filter<float, FILTER_SIZE> moving_average;
     moving_average.SetCoefficients(num, den);
+    
 
     std::cout << "Selected filter is moving average(5)" << std::endl;
 
