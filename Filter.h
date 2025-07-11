@@ -33,19 +33,9 @@
 **
 **
 *******************************************************
-Future Updates:
-* Add variable filter size                        - DONE
-* Remove dynamic allocation                       - DONE
-* Add template for filtering variable type        - DONE
-* Add embedded systems standard recommendations   - DONE
-* Add othe standard recomendations
-* Keep library std-free                           - DONE
-* Add google tests
-* Add pre-designed filtering options
 */
 
-#ifndef FILTER_H
-#define FILTER_H
+#pragma once
 
 #include <cassert>
 
@@ -118,5 +108,3 @@ Type Filter<Type, N>::Update(const Type new_value)
 
   return output[0];
 }
-
-#endif
