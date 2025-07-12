@@ -1,5 +1,5 @@
 /**
- * @file main.cpp
+ * @file example1_Moving_average.cpp
  * @author David Secades (davidsecacontrol@gmail.com)
  * @brief Example 1: Moving average filter with user input
  * @version 0.1
@@ -12,11 +12,8 @@
 #include <iostream>
 #include "Filter.h"
 
-/**
- * @brief Example 1: Moving average with user input
- *
- * @return int
- */
+/// @cond
+
 int main()
 {
     float num[] = {0.2, 0.2, 0.2, 0.2, 0.2};
@@ -40,3 +37,5 @@ int main()
     }
     return 0;
 }
+
+/// @endcond

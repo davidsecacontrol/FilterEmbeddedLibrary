@@ -10,9 +10,10 @@
         "-Wextra",
         "-Wimplicit-fallthrough",
         "-Wundef",
+        "-std=c++20",
         "-I./include",
         "-g",               // Include debug info
-        "examples/example1_Moving_average.cpp",         // Change to your source file(s)
+        "examples/example2_Exponentially_weighted_moving_average.cpp",         // Change to your source file(s)
         "-o",
         "main.exe"             // Output binary
       ],
@@ -34,7 +35,7 @@
         "-Wundef",
         "-I./include",
         "-g",               // Include debug info
-        "examples/example1_Moving_average.cpp",         // Change to your source file(s)
+        "examples/example2_Exponentially_weighted_moving_average.cpp",         // Change to your source file(s)
         "-o",
         "main.out"             // Output binary
       ],

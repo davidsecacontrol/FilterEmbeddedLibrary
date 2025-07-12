@@ -57,6 +57,10 @@
         "xtr1common": "cpp",
         "xutility": "cpp",
         "cassert": "cpp",
-        "array": "cpp"
+        "array": "cpp",
+        "random": "cpp",
+        "algorithm": "cpp",
+        "numeric": "cpp",
+        "optional": "cpp"
     }
 }
