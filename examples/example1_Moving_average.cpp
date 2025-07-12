@@ -1,5 +1,5 @@
 /**
- * @file main.cpp
+ * @file example1_Moving_average.cpp
  * @author David Secades (davidsecacontrol@gmail.com)
  * @brief Example 1: Moving average filter with user input
  * @version 0.1
