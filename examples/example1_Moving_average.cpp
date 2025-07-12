@@ -12,11 +12,8 @@
 #include <iostream>
 #include "Filter.h"
 
-/**
- * @brief Example 1: Moving average with user input
- *
- * @return int
- */
+/// @cond
+
 int main()
 {
     float num[] = {0.2, 0.2, 0.2, 0.2, 0.2};
@@ -40,3 +37,5 @@ int main()
     }
     return 0;
 }
+
+/// @endcond

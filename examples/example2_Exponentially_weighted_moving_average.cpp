@@ -1,6 +1,6 @@
 
 /**
- * @file Exponentially_weighted_moving_average.cpp
+ * @file example2_Exponentially_weighted_moving_average.cpp
  * @author David Secades (davidsecacontrol@gmail.com)
  * @brief Implementation of a exponentially weighted moving average filter
  * @version 0.1
@@ -18,17 +18,13 @@
 
 #include "Filter.h"
 
-
+/// @cond
 constexpr double PI = 3.14159265358979323846;
 
 
 float SineWaveWithNoiseSample(const float time,const float frequency, const float gain, const float noise_std_dev );
 
-/**
- * @brief Example 2: Exponentially weighted moving average (EWMA) filter applied to a set of data
- *
- * @return int
- */
+
 int main()
 {
     std::cout << "Selected filter is exponentially weighted moving average" << std::endl;
@@ -85,9 +81,9 @@ int main()
 }
 
 
-
 float SineWaveWithNoiseSample(const float time,const float frequency, const float gain, const float noise_std_dev ){
     static std::default_random_engine generator;
     static std::normal_distribution<float> distribution(0,noise_std_dev); // mean,sdev
     return std::sin(2*PI*time/frequency)*gain + distribution(generator);
 }
+/// @endcond
