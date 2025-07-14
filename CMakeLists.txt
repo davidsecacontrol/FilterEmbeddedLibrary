@@ -7,5 +7,7 @@ set(CMAKE_CXX_STANDARD_REQUIRED True)
 
 
 add_executable(example1_Moving_average examples/example1_Moving_average.cpp)
+add_executable(example2_Exponentially_Weighted_Moving_Average examples/example2_Exponentially_Weighted_Moving_Average.cpp)
 
 target_include_directories(example1_Moving_average PRIVATE include)
+target_include_directories(example2_Exponentially_Weighted_Moving_Average PRIVATE include)
