@@ -16,8 +16,8 @@
 
 int main()
 {
-    float num[] = {0.2, 0.2, 0.2, 0.2, 0.2};
-    float den[] = {1, 0, 0, 0, 0};
+    float num[] = {0.2f, 0.2f, 0.2f, 0.2f, 0.2f};
+    float den[] = {1.0f, 0.0f, 0.0f, 0.0f, 0.0f};
 
     constexpr unsigned int FILTER_SIZE = 5;
     Filter<float, FILTER_SIZE> moving_average;
