@@ -28,7 +28,7 @@ Although not recommended, it is possible to change the filter states to avoid tr
 ```
 
 ## Compilation
-This repository uses CMake. It is already configured for CMake Tools extension and runs on the default generator.
+This repository uses CMake. It is already configured for the [CMake Tools extension](https://marketplace.visualstudio.com/items?itemName=ms-vscode.cmake-tools) and runs on the default generator.
 
 ## Documentation
 This reopsitory uses doxygen. For Windows, run `doxygen Doxyfile`.
