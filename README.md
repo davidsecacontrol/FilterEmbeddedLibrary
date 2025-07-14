@@ -1,5 +1,5 @@
 # FilterEmbeddedLibrary
-This repository contains a statically allocated, STL-free digital signal processing library for embedded systems. 
+This repository contains a statically allocated, STL-free digital signal processing library for embedded systems.
 
 ## Installation
 Copy all files from [include](include) into your headers folder.
@@ -27,6 +27,12 @@ Although not recommended, it is possible to change the filter states to avoid tr
   my_filter.SetState(input_state,output_state);
 ```
 
+## Compilation
+This repository uses CMake. It is already configured for CMake Tools extension and runs on the default generator.
+
+## Documentation
+This reopsitory uses doxygen. For Windows, run `doxygen Doxyfile`.
+
 ## Future Updates
 This repository is also a learning experience. The expected roadmap is:
 - [X] Add variable filter size
@@ -35,6 +41,7 @@ This repository is also a learning experience. The expected roadmap is:
 - [X] Add embedded systems standard recommendations
 - [ ] Add other standard recomendations (AUTOSAR/ C++ standards)
 - [X] Keep library std-free
+- [X] Add CMake compilation
 - [ ] Add google tests                                          
 - [ ] Add pre-designed filtering options
 - [X] Add doxygen docuemntation
