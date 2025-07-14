@@ -5,6 +5,7 @@ project(FILTER_LIBRARY)
 set(CMAKE_CXX_STANDARD 20)
 set(CMAKE_CXX_STANDARD_REQUIRED True)
 
+add_compile_options(-Wall -Wextra -Wimplicit -fallthrough -Wundef)
 
 add_executable(example1_Moving_average examples/example1_Moving_average.cpp)
 add_executable(example2_Exponentially_Weighted_Moving_Average examples/example2_Exponentially_Weighted_Moving_Average.cpp)
