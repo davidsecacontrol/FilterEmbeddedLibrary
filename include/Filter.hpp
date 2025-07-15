@@ -28,10 +28,7 @@ class Filter
 {
 
 public:
-  /// @cond
-  float numerator[N] = {};
-  float denominator[N] = {};
-  /// @endcond
+
 
   void SetCoefficients(float const *const numerator, float const *const denominator);
 
@@ -42,6 +39,9 @@ public:
 private:
   Type input[N] = {};  // x[n]
   Type output[N] = {}; // y[n]
+
+  float numerator[N] = {};
+  float denominator[N] = {};
 };
 
 // Class function definitions (required in same file by templates) ------------------------------------------------------------
