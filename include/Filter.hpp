@@ -58,8 +58,8 @@ void Filter<Type, N>::SetCoefficients(float const *const numerator, float const 
 {
 
   // Store the inputs
-  CopyArray(this->m_numerator, numerator, N);
-  CopyArray(this->m_denominator, denominator, N);
+  CopyArray(m_numerator, numerator, N);
+  CopyArray(m_denominator, denominator, N);
 }
 
 /**
@@ -79,13 +79,13 @@ void Filter<Type, N>::SetCoefficientsFromZTransform(float const *const numerator
   // Solve for y(z) by
 
   // normalizing filter coefficients (required b[0] = 1)
-  DivideArrayElements(this->m_numerator, N, this->m_denominator[0]);
-  DivideArrayElements(this->m_denominator, N, this->m_denominator[0]);
+  DivideArrayElements(m_numerator, N, m_denominator[0]);
+  DivideArrayElements(m_denominator, N, m_denominator[0]);
 
   // and negating b[2...N]
   for (unsigned int i = 1; i < N; i++)
   {
-    this->m_denominator[i] *= -1.0f;
+    m_denominator[i] *= -1.0f;
   }
 }
 
