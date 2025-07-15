@@ -28,8 +28,6 @@ class Filter
 {
 
 public:
-
-
   void SetCoefficients(float const *const numerator, float const *const denominator);
 
   void SetCoefficientsFromZTransform(float const *const numerator, float const *const denominator);
