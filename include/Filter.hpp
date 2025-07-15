@@ -34,6 +34,8 @@ public:
 
   Type Update(const Type new_value);
 
+  void SetState(Type const *const input_state, Type const *const output_state);
+
 private:
   Type m_input[N] = {};  // x[n]
   Type m_output[N] = {}; // y[n]
@@ -109,4 +111,11 @@ Type Filter<Type, N>::Update(const Type new_value)
   m_output[0] = DotProduct(m_numerator, m_input, N) + DotProduct(m_denominator, m_output, N);
 
   return m_output[0];
+}
+
+template <typename Type, unsigned int N>
+void Filter<Type, N>::SetState(Type const * const input_state, Type const *const output_state)
+{
+  CopyArray(m_input, input_state);
+  CopyArray(m_output, output_state);
 }
