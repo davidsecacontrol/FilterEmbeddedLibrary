@@ -13,7 +13,7 @@
 
 #include <cassert>
 
-#include "Filter_utils.h"
+#include "Filter_utils.hpp"
 
 /**
  * @brief Main filter class.

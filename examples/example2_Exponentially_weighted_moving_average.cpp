@@ -16,7 +16,7 @@
 #include <numeric>
 #include <cmath>
 
-#include "Filter.h"
+#include "Filter.hpp"
 
 /// @cond
 constexpr double PI = 3.14159265358979323846;
