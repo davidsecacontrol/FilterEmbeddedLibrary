@@ -42,8 +42,8 @@ private:
   Type m_input[N] = {};  // x[n]
   Type m_output[N] = {}; // y[n]
 
-  float m_numerator[N] = {};
-  float m_denominator[N] = {};
+  Type m_numerator[N] = {};
+  Type m_denominator[N] = {};
 };
 
 // Class function definitions (required in same file by templates) ------------------------------------------------------------
