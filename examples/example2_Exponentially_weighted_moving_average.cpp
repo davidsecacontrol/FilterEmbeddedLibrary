@@ -36,7 +36,7 @@ int main()
         constexpr float gain = 10;
         constexpr float noise_std_dev = 1.5;
 
-        std::iota(timeData.begin(), timeData.end(), 1);                                       // Fill time with 1,2,3,...
+        std::iota(timeData.begin(), timeData.end(), 1.0f);                                       // Fill time with 1,2,3,...
         std::transform(timeData.begin(), timeData.end(), inputData.begin(), [&](float time) { // Compute input
             return SineWaveWithNoiseSample(time, frequency, gain, noise_std_dev);
         });
@@ -50,7 +50,7 @@ int main()
     float den[] = {1, 1 - lambda};
 
     Filter<float, FILTER_SIZE> EWMA_filter;
-    EWMA_filter.SetCoefficients(num, den);
+    EWMA_filter.SetCoefficients(num, den, FILTER_SIZE);
 
     // Apply the filter to all the data
     std::array<float, number_of_samples> outputData;
@@ -76,6 +76,6 @@ float SineWaveWithNoiseSample(const float time, const float frequency, const flo
 {
     static std::default_random_engine generator;
     static std::normal_distribution<float> distribution(0, noise_std_dev); // mean,sdev
-    return std::sin(2 * PI * time / frequency) * gain + distribution(generator);
+    return (float) (std::sin(2 * PI * time / frequency) * gain + distribution(generator));
 }
 /// @endcond
