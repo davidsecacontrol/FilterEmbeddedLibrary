@@ -28,15 +28,16 @@ class Filter
 {
 
 public:
-  void SetCoefficients(float const *const numerator, float const *const denominator);
+  void SetCoefficients(float const *const numerator, float const *const denominator, unsigned int size);
 
-  void SetCoefficientsFromZTransform(float const *const numerator, float const *const denominator);
+  void SetCoefficientsFromZTransform(float const *const numerator, float const *const denominator, unsigned int size);
 
   Type Update(const Type new_value);
 
   void SetState(Type const *const input_state, Type const *const output_state);
 
   void ClearState();
+
 private:
   Type m_input[N] = {};  // x[n]
   Type m_output[N] = {}; // y[n]
@@ -53,16 +54,25 @@ private:
  * @note Notice that b[0] is ignored in the computation.
  * @param numerator Filter input coefficients \f$a[k]\quad :\quad  y[n] = \sum_{k=0}^{N}a[k]*x[n-k] + \dots\f$
  * @param denominator Filter output coefficients \f$b[k]\quad :\quad y[n] = \dots + \sum_{k=1}^{N}b[k]*y[n-k]\f$
- *
+ * @param size Number of elements to copy. The rest is init to 0
  *
  */
 template <typename Type, unsigned int N>
-void Filter<Type, N>::SetCoefficients(float const *const numerator, float const *const denominator)
+void Filter<Type, N>::SetCoefficients(float const *const numerator, float const *const denominator, unsigned int size)
 {
+  assert(size <= N);
+
+  // Num,den are < N, flush array.
+  if (size != N)
+  {
+    Type zero_setting[N] = {0};
+    CopyArray(m_numerator, zero_setting,N);
+    CopyArray(m_denominator, zero_setting,N);
+  }
 
   // Store the inputs
-  CopyArray(m_numerator, numerator, N);
-  CopyArray(m_denominator, denominator, N);
+  CopyArray(m_numerator, numerator, size);
+  CopyArray(m_denominator, denominator, size);
 }
 
 /**
@@ -70,9 +80,10 @@ void Filter<Type, N>::SetCoefficients(float const *const numerator, float const 
  *
  * @param numerator Z transform numerator \f$a[k]\f$
  * @param denominator Z transofrm denominator \f$b[k]\f$
+ * @param size Number of coefficients
  */
 template <typename Type, unsigned int N>
-void Filter<Type, N>::SetCoefficientsFromZTransform(float const *const numerator, float const *const denominator)
+void Filter<Type, N>::SetCoefficientsFromZTransform(float const *const numerator, float const *const denominator, unsigned int size)
 {
   // If b[0] = 0, the filter coefficients are incorrect.
   assert(denominator[0] != 0);
@@ -115,7 +126,7 @@ Type Filter<Type, N>::Update(const Type new_value)
 }
 
 template <typename Type, unsigned int N>
-void Filter<Type, N>::SetState(Type const * const input_state, Type const *const output_state)
+void Filter<Type, N>::SetState(Type const *const input_state, Type const *const output_state)
 {
   CopyArray(m_input, input_state);
   CopyArray(m_output, output_state);
@@ -124,7 +135,8 @@ void Filter<Type, N>::SetState(Type const * const input_state, Type const *const
 template <typename Type, unsigned int N>
 void Filter<Type, N>::ClearState()
 {
-  for(unsigned int i = 0; i < N; i++){
+  for (unsigned int i = 0; i < N; i++)
+  {
     m_input[i] = 0;
     m_output[i] = 0;
   }
