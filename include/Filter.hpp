@@ -116,8 +116,8 @@ Type Filter<Type, N>::Update(const Type new_value)
 /**
  * @brief Copyes the arrays input_state and output_state into the filter class.
  * 
- * @param input_state Array of values to set the input history x[n].... x[n-N]
- * @param output_state Array of vaues to set the output history y[n]... y[n-N]
+ * @param input_state Array of values to set the input history \f$x[n] \dots x[n-N]\f$
+ * @param output_state Array of vaues to set the output history \f$y[n] \dots y[n-N]\f$
  */
 template <typename Type, unsigned int N>
 void Filter<Type, N>::SetState(Type const * const input_state, Type const *const output_state)
