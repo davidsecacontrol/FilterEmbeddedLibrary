@@ -29,7 +29,7 @@ FetchContent_MakeAvailable(googletest)
 # Adding tests
 enable_testing()
 
-add_executable(Filter_test_compilation tests/Filter_testing.cc)
+add_executable(Filter_test_compilation tests/Filter_testing.cpp)
 target_link_libraries(Filter_test_compilation GTest::gtest_main)
 
 include(GoogleTest)
