@@ -13,7 +13,7 @@
 
 #include <cassert>
 
-#include "Filter_utils.h"
+#include "Filter_utils.hpp"
 
 /**
  * @brief Main filter class.
@@ -28,20 +28,20 @@ class Filter
 {
 
 public:
-  /// @cond
-  float numerator[N] = {};
-  float denominator[N] = {};
-  /// @endcond
-
   void SetCoefficients(float const *const numerator, float const *const denominator);
 
   void SetCoefficientsFromZTransform(float const *const numerator, float const *const denominator);
 
   Type Update(const Type new_value);
 
+  void SetState(Type const *const input_state, Type const *const output_state);
+
 private:
-  Type input[N] = {};  // x[n]
-  Type output[N] = {}; // y[n]
+  Type m_input[N] = {};  // x[n]
+  Type m_output[N] = {}; // y[n]
+
+  float m_numerator[N] = {};
+  float m_denominator[N] = {};
 };
 
 // Class function definitions (required in same file by templates) ------------------------------------------------------------
@@ -60,8 +60,8 @@ void Filter<Type, N>::SetCoefficients(float const *const numerator, float const 
 {
 
   // Store the inputs
-  CopyArray(this->numerator, numerator, N);
-  CopyArray(this->denominator, denominator, N);
+  CopyArray(m_numerator, numerator, N);
+  CopyArray(m_denominator, denominator, N);
 }
 
 /**
@@ -73,21 +73,21 @@ void Filter<Type, N>::SetCoefficients(float const *const numerator, float const 
 template <typename Type, unsigned int N>
 void Filter<Type, N>::SetCoefficientsFromZTransform(float const *const numerator, float const *const denominator)
 {
-  SetCoefficients(numerator, denominator);
-
   // If b[0] = 0, the filter coefficients are incorrect.
   assert(denominator[0] != 0);
+
+  SetCoefficients(numerator, denominator);
 
   // Solve for y(z) by
 
   // normalizing filter coefficients (required b[0] = 1)
-  DivideArrayElements(this->numerator, N, this->denominator[0]);
-  DivideArrayElements(this->denominator, N, this->denominator[0]);
+  DivideArrayElements(m_numerator, N, m_denominator[0]);
+  DivideArrayElements(m_denominator, N, m_denominator[0]);
 
   // and negating b[2...N]
   for (unsigned int i = 1; i < N; i++)
   {
-    this->denominator[i] *= -1.0f;
+    m_denominator[i] *= -1.0f;
   }
 }
 
@@ -101,14 +101,27 @@ template <typename Type, unsigned int N>
 Type Filter<Type, N>::Update(const Type new_value)
 {
   // Next time instant
-  AdvanceArray(input, N);
-  AdvanceArray(output, N);
+  AdvanceArray(m_input, N);
+  AdvanceArray(m_output, N);
 
   // Introduce filter input
-  input[0] = new_value;
+  m_input[0] = new_value;
 
   // Compute filter response
-  output[0] = DotProduct(numerator, input, N) + DotProduct(denominator, output, N);
+  m_output[0] = DotProduct(m_numerator, m_input, N) + DotProduct(m_denominator, m_output, N);
 
-  return output[0];
+  return m_output[0];
+}
+
+/**
+ * @brief Copyes the arrays input_state and output_state into the filter class.
+ * 
+ * @param input_state Array of values to set the input history x[n].... x[n-N]
+ * @param output_state Array of vaues to set the output history y[n]... y[n-N]
+ */
+template <typename Type, unsigned int N>
+void Filter<Type, N>::SetState(Type const * const input_state, Type const *const output_state)
+{
+  CopyArray(m_input, input_state);
+  CopyArray(m_output, output_state);
 }
