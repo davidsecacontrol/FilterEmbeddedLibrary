@@ -29,11 +29,11 @@ FetchContent_MakeAvailable(googletest)
 # Adding tests
 enable_testing()
 
-add_executable(hello_test tests/Filter_testing.cc)
-target_link_libraries(hello_test GTest::gtest_main)
+add_executable(Filter_test_compilation tests/Filter_testing.cc)
+target_link_libraries(Filter_test_compilation GTest::gtest_main)
 
 include(GoogleTest)
-gtest_discover_tests(hello_test)
+gtest_discover_tests(Filter_test_compilation)
 
 # ----------------------------------------------------------------------------------------------
 
