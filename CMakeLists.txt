@@ -31,6 +31,7 @@ enable_testing()
 
 add_executable(Filter_test_compilation tests/Filter_testing.cpp)
 target_link_libraries(Filter_test_compilation GTest::gtest_main)
+target_include_directories(Filter_test_compilation PRIVATE include)
 
 include(GoogleTest)
 gtest_discover_tests(Filter_test_compilation)
