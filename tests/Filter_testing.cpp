@@ -1,3 +1,15 @@
+/**
+ * @file Filter_testing.cpp
+ * @author David Secades (davidsecacontrol@gmail.com)
+ * @brief Testing compilation for the Filter.h library
+ * @version 0.1
+ * @date 2025-08-03
+ * 
+ * @copyright Copyright (c) 2025
+ * 
+ */
+
+
 #include <gtest/gtest.h>
 
 #include "Filter.hpp"
