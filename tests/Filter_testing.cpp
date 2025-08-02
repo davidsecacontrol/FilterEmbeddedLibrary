@@ -25,17 +25,78 @@ class FilterTestHelper : public Filter<Type,N> {
     }
 };
 
-TEST(PublicAPITests,InitializationTest_SetCoefficients) {
-    // test values are copied properly
-    // Test states are set properly(0...0,0...0)
-    EXPECT_EQ(7*6,42);
+/**
+ * @brief Ensures num,den, input, output vectors are initialized correctly for SetCoefficients()
+ * 
+ */
+TEST(PublicAPITests,SetCoefficients_InitializationsAreCorrect) {
+    constexpr unsigned int N = 5;
+    FilterTestHelper<float,N> test_filter;
+
+    // Assign numerator & denominator
+    float num[N] = {1.0f, 2.0f, 3.0f, 4.0f, 5.0f};
+    float den[N] = {-1.0f, -2.0f, -3.0f, -4.0f, -5.0f};
+
+    test_filter.SetCoefficients(num,den);
+
+    // Check numerator & denominator
+    float* num_copied = test_filter.GetNumerator();
+    float* den_copied = test_filter.GetDenominator();
+
+    for(unsigned int i = 0; i < N ; i++){
+        ASSERT_FLOAT_EQ(num[i],num_copied[i]);
+        ASSERT_FLOAT_EQ(den[i],den_copied[i]);
+    }
+
+    // Check inputs & outputs initialiation is correct
+    float* input_copied = test_filter.GetInputState();
+    float* output_copied = test_filter.GetOutputState();
+    
+    for(unsigned int i = 0; i < N ; i++){
+        ASSERT_FLOAT_EQ(input_copied[i],0.0f);
+        ASSERT_FLOAT_EQ(output_copied[i],0.0f);
+    }
 }
 
+/**
+ * @brief Tests that num,den, input, output arrays are initialized correctly for SetCoefficientsFromZTransform()
+ * 
+ */
+TEST(PublicAPITests,SetCoefficientsFromZTransform_InitializationsAreCorrect) {
+    // Test values are computed properly
+    constexpr unsigned int N = 5;
+    FilterTestHelper<float,N> test_filter;
 
-TEST(PublicAPITests,InitializationTest_SetCoefficientsFromZTransform) {
-    // Test values are computed proeprly
-    // Test states are set properly (0...0,0...0)
-    EXPECT_EQ(7*6,42);
+    // Assign numerator & denominator
+    float num[N] = {1.0f, 2.0f, 3.0f, 4.0f, 5.0f};
+    float den[N] = {-1.0f, -2.0f, -3.0f, -4.0f, -5.0f};
+
+    test_filter.SetCoefficientsFromZTransform(num,den);
+    // Check numerator & denominator
+    float* num_copied = test_filter.GetNumerator();
+    float* den_copied = test_filter.GetDenominator();
+
+    for(unsigned int i = 0; i < N ; i++){
+        ASSERT_FLOAT_EQ(num[i]/den[0],num_copied[i]); 
+        ASSERT_FLOAT_EQ(-den[i]/den[0],den_copied[i]);
+    }
+
+    // Check inputs & outputs initialiation is correct
+    float* input_copied = test_filter.GetInputState();
+    float* output_copied = test_filter.GetOutputState();
+    
+    for(unsigned int i = 0; i < N ; i++){
+        ASSERT_FLOAT_EQ(input_copied[i],0.0f);
+        ASSERT_FLOAT_EQ(output_copied[i],0.0f);
+    }
+}
+
+/**
+ * @brief Tests SetCoefficientsFromZTransform() can handle the division error when den[0] == 0 - TO BE IMPLEMENTED
+ * 
+ */
+TEST(PublicAPITests,SetCoefficientsFromZTransform_HandlesDivideByZero) {
+    // TBD
 }
 
 TEST(PublicAPITests,ResultTest_Update) {
@@ -46,6 +107,21 @@ TEST(PublicAPITests,ResultTest_Update) {
 
 TEST(PublicAPITests,InitialziationTest_SetState) {
     // Test values are computed properly
-    // Test states are set properly (0...0,0...0)
-    EXPECT_EQ(7*6,42);
+    constexpr unsigned int N = 5;
+    FilterTestHelper<float,N> test_filter;
+
+    // Assign numerator & denominator
+    float input_state[N] = {1.0f, 2.0f, 3.0f, 4.0f, 5.0f};
+    float output_state[N] = {-1.0f, -2.0f, -3.0f, -4.0f, -5.0f};
+
+    test_filter.SetState(input_state,output_state);
+
+    // Check inputs & outputs copy is correct
+    float* input_copied = test_filter.GetInputState();
+    float* output_copied = test_filter.GetOutputState();
+    
+    for(unsigned int i = 0; i < N ; i++){
+        ASSERT_FLOAT_EQ(input_state[i],input_copied[i]);
+        ASSERT_FLOAT_EQ(output_state[i],output_copied[i]);
+    }
 }
