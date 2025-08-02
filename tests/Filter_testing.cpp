@@ -99,12 +99,20 @@ TEST(PublicAPITests,SetCoefficientsFromZTransform_HandlesDivideByZero) {
     // TBD
 }
 
+/**
+ * @brief Tests Update() with a ____ filter - TO BE IMPLEMENTED
+ * 
+ */
 TEST(PublicAPITests,ResultTest_Update) {
     // Ensure return value works as an expected filter: 
     //fx select a couple filters from MATLAB and test results match
     EXPECT_EQ(7*6,42);
 }
 
+/**
+ * @brief Tests SetState() copies properly
+ * 
+ */
 TEST(PublicAPITests,InitialziationTest_SetState) {
     // Test values are computed properly
     constexpr unsigned int N = 5;
