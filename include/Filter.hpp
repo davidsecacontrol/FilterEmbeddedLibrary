@@ -28,9 +28,9 @@ class Filter
 {
 
 public:
-  void SetCoefficients(float const *const numerator, float const *const denominator);
+  void SetCoefficients(Type const *const numerator, Type const *const denominator);
 
-  void SetCoefficientsFromZTransform(float const *const numerator, float const *const denominator);
+  void SetCoefficientsFromZTransform(Type const *const numerator, Type const *const denominator);
 
   Type Update(const Type new_value);
 
@@ -40,8 +40,8 @@ protected:
   Type m_input[N] = {};  // x[n]
   Type m_output[N] = {}; // y[n]
 
-  float m_numerator[N] = {};
-  float m_denominator[N] = {};
+  Type m_numerator[N] = {};
+  Type m_denominator[N] = {};
 };
 
 // Class function definitions (required in same file by templates) ------------------------------------------------------------
@@ -56,7 +56,7 @@ protected:
  *
  */
 template <typename Type, unsigned int N>
-void Filter<Type, N>::SetCoefficients(float const *const numerator, float const *const denominator)
+void Filter<Type, N>::SetCoefficients(Type const *const numerator, Type const *const denominator)
 {
 
   // Store the inputs
@@ -71,7 +71,7 @@ void Filter<Type, N>::SetCoefficients(float const *const numerator, float const 
  * @param denominator Z transofrm denominator \f$b[k]\f$
  */
 template <typename Type, unsigned int N>
-void Filter<Type, N>::SetCoefficientsFromZTransform(float const *const numerator, float const *const denominator)
+void Filter<Type, N>::SetCoefficientsFromZTransform(Type const *const numerator, Type const *const denominator)
 {
   // If b[0] = 0, the filter coefficients are incorrect.
   assert(denominator[0] != 0);
