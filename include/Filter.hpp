@@ -122,6 +122,6 @@ Type Filter<Type, N>::Update(const Type new_value)
 template <typename Type, unsigned int N>
 void Filter<Type, N>::SetState(Type const * const input_state, Type const *const output_state)
 {
-  CopyArray(m_input, input_state);
-  CopyArray(m_output, output_state);
+  CopyArray(m_input, input_state,N);
+  CopyArray(m_output, output_state,N);
 }
