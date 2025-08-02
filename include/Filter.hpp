@@ -85,7 +85,7 @@ void Filter<Type, N>::SetCoefficientsFromZTransform(Type const *const numerator,
   DivideArrayElements(m_denominator, N, m_denominator[0]);
 
   // and negating b[2...N]
-  for (unsigned int i = 1; i < N; i++)
+  for (unsigned int i = 0; i < N; i++)
   {
     m_denominator[i] *= -1.0f;
   }
