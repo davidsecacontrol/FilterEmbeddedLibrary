@@ -8,6 +8,22 @@
 */
 
 // Create a FilterTestHelper class that derives from FilterTest to get access to protected members
+template<typename Type, unsigned int N>
+class FilterTestHelper : public Filter<Type,N> {
+    public:
+    Type* GetNumerator(){
+        return this->m_numerator;
+    }
+    Type* GetDenominator(){
+        return this->m_denominator;
+    }
+    Type* GetInputState(){
+        return this->m_input;
+    }
+    Type* GetOutputState(){
+        return this->m_output;
+    }
+};
 
 TEST(PublicAPITests,InitializationTest_SetCoefficients) {
     // test values are copied properly

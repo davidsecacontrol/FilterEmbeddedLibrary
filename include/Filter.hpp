@@ -36,7 +36,7 @@ public:
 
   void SetState(Type const *const input_state, Type const *const output_state);
 
-private:
+protected:
   Type m_input[N] = {};  // x[n]
   Type m_output[N] = {}; // y[n]
 
