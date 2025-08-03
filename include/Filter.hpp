@@ -40,6 +40,7 @@ public:
 
   void SetState(Type const *const input_state, Type const *const output_state);
 
+  void ClearState();
 
 protected:
 
@@ -138,4 +139,18 @@ void Filter<Type, N>::SetState(Type const * const input_state, Type const *const
   CopyArray(m_input, input_state,N);
   CopyArray(m_output, output_state,N);
 
+}
+
+/**
+ * @brief Sets m_input and m_output arrays to 0.
+ * 
+ */
+template <typename Type, unsigned int N>
+void Filter<Type, N>::ClearState()
+{
+  for (unsigned int i = 0; i < N; i++)
+  {
+    m_input[i] = 0;
+    m_output[i] = 0;
+  }
 }
