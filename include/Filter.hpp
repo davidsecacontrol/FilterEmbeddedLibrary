@@ -74,7 +74,6 @@ void Filter<Type, N>::SetCoefficients(Type const *const numerator, Type const *c
  * @param denominator Z transofrm denominator \f$b[k]\f$
  */
 template <typename Type, unsigned int N>
-void Filter<Type, N>::SetCoefficientsFromZTransform(Type const *const numerator, Type const *const denominator)
 FilterErrorState Filter<Type, N>::SetCoefficientsFromZTransform(Type const *const numerator, Type const *const denominator)
 {
   // If b[0] = 0, the filter coefficients are incorrect.
