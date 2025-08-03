@@ -34,8 +34,7 @@ target_link_libraries(Filter_test_compilation GTest::gtest_main)
 target_include_directories(Filter_test_compilation PRIVATE include)
 
 include(GoogleTest)
-#gtest_discover_tests(Filter_test_compilation)
-add_test(NAME FilterTests COMMAND Filter_test_compilation)
+gtest_discover_tests(Filter_test_compilation)
 
 
 
