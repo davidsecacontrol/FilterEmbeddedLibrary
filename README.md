@@ -17,11 +17,11 @@ Now, every new measurement can be filtered (See examples 1,2):
   OUTPUT_TYPE new_filtered_value = my_filter.Update(new_value);
 ```
 
-The Z transform numerator & denominator coefficients can also be supplied and the library will automatically convert them to the filter weights:
+Besides, the Z transform numerator & denominator coefficients (from f.x. MATLAB) can be supplied instead and the library will automatically convert them to the filter weights:
 ``` c++
   my_filter.SetCoefficientsFromZTransform(numerator,denominator);
 ```
-The state can be cleared to reinitialize the filter:
+The filter can be cleared for easy reinitialziation:
 ``` c++
   my_filter.ClearState();
 ```
@@ -33,7 +33,9 @@ Finally although not recommended, it is possible to change the filter states:
 
 
 ## Compilation
-This repository uses CMake. It is already configured for the [CMake Tools extension](https://marketplace.visualstudio.com/items?itemName=ms-vscode.cmake-tools) and runs on the default generator.
+For usage of this library, check [installation](#Installation) chapter.
+
+For development, this repository uses CMake. It is already configured for the [CMake Tools extension](https://marketplace.visualstudio.com/items?itemName=ms-vscode.cmake-tools) and runs on the default generator.
 
 ## Documentation
 This repository uses doxygen. For Windows, run `doxygen Doxyfile`.
