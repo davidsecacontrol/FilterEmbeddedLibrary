@@ -50,7 +50,7 @@ int main()
     float den[] = {1, 1 - lambda};
 
     Filter<float, FILTER_SIZE> EWMA_filter;
-    EWMA_filter.SetCoefficients(num, den, FILTER_SIZE);
+    EWMA_filter.SetCoefficients(num, den);
 
     // Apply the filter to all the data
     std::array<float, number_of_samples> outputData;
