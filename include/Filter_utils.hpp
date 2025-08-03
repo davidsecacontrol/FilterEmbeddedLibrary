@@ -10,7 +10,6 @@
  */
 #pragma once
 
-#include <cassert>
 
 /**
  * @brief Computes the dot product of two vectors of length \p size
@@ -82,7 +81,6 @@ void CopyArray(Type *const destination, Type const *const source, unsigned int s
 template <typename Type>
 void DivideArrayElements(Type *const array, unsigned int size, Type divisor)
 {
-  assert(divisor != 0);
 
   for (unsigned int i = 0; i < size; i++)
   {

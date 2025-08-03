@@ -11,9 +11,12 @@
 
 #pragma once
 
-#include <cassert>
-
 #include "Filter_utils.hpp"
+
+
+typedef enum{ALL_OK=0,ERR_DIV_BY_0} FilterErrorState;
+
+ 
 
 /**
  * @brief Main filter class.
@@ -30,7 +33,7 @@ class Filter
 public:
   void SetCoefficients(Type const *const numerator, Type const *const denominator);
 
-  void SetCoefficientsFromZTransform(Type const *const numerator, Type const *const denominator);
+  FilterErrorState SetCoefficientsFromZTransform(Type const *const numerator, Type const *const denominator);
 
   Type Update(const Type new_value);
 
@@ -72,9 +75,13 @@ void Filter<Type, N>::SetCoefficients(Type const *const numerator, Type const *c
  */
 template <typename Type, unsigned int N>
 void Filter<Type, N>::SetCoefficientsFromZTransform(Type const *const numerator, Type const *const denominator)
+FilterErrorState Filter<Type, N>::SetCoefficientsFromZTransform(Type const *const numerator, Type const *const denominator)
 {
   // If b[0] = 0, the filter coefficients are incorrect.
-  assert(denominator[0] != 0);
+  if(denominator[0] == 0){
+    return FilterErrorState::ERR_DIV_BY_0;
+  }
+ 
 
   SetCoefficients(numerator, denominator);
 
@@ -89,6 +96,8 @@ void Filter<Type, N>::SetCoefficientsFromZTransform(Type const *const numerator,
   {
     m_denominator[i] *= -1.0f;
   }
+
+  return FilterErrorState::ALL_OK;
 }
 
 /**
