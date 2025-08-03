@@ -104,7 +104,7 @@ TEST(PublicAPITests,SetCoefficientsFromZTransform_InitializationsAreCorrect) {
 }
 
 /**
- * @brief Tests SetCoefficientsFromZTransform() can handle the division error when den[0] == 0 - TO BE IMPLEMENTED
+ * @brief Tests SetCoefficientsFromZTransform() can handle the division error when den[0] == 0 instead of throwing
  * 
  */
 TEST(PublicAPITests,SetCoefficientsFromZTransform_HandlesDivideByZero) {
