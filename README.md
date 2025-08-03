@@ -23,7 +23,7 @@ The Z transform numerator & denominator coefficients can also be supplied and th
 ```
 The state can be cleared to reinitialize the filter:
 ``` c++
-  my_filter.SetState();
+  my_filter.ClearState();
 ```
 
 Finally although not recommended, it is possible to change the filter states:
