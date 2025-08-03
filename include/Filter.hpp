@@ -16,7 +16,6 @@
 
 typedef enum{ALL_OK=0,ERR_DIV_BY_0} FilterErrorState;
 
- 
 
 /**
  * @brief Main filter class.
@@ -31,15 +30,19 @@ class Filter
 {
 
 public:
+
   void SetCoefficients(Type const *const numerator, Type const *const denominator);
 
   FilterErrorState SetCoefficientsFromZTransform(Type const *const numerator, Type const *const denominator);
+
 
   Type Update(const Type new_value);
 
   void SetState(Type const *const input_state, Type const *const output_state);
 
+
 protected:
+
   Type m_input[N] = {};  // x[n]
   Type m_output[N] = {}; // y[n]
 
@@ -65,6 +68,7 @@ void Filter<Type, N>::SetCoefficients(Type const *const numerator, Type const *c
   // Store the inputs
   CopyArray(m_numerator, numerator, N);
   CopyArray(m_denominator, denominator, N);
+
 }
 
 /**
@@ -80,7 +84,7 @@ FilterErrorState Filter<Type, N>::SetCoefficientsFromZTransform(Type const *cons
   if(denominator[0] == 0){
     return FilterErrorState::ERR_DIV_BY_0;
   }
- 
+
 
   SetCoefficients(numerator, denominator);
 
@@ -97,6 +101,7 @@ FilterErrorState Filter<Type, N>::SetCoefficientsFromZTransform(Type const *cons
   }
 
   return FilterErrorState::ALL_OK;
+
 }
 
 /**
@@ -132,4 +137,5 @@ void Filter<Type, N>::SetState(Type const * const input_state, Type const *const
 {
   CopyArray(m_input, input_state,N);
   CopyArray(m_output, output_state,N);
+
 }

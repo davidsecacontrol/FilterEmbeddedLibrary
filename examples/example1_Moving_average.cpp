@@ -21,7 +21,7 @@ int main()
 
     constexpr unsigned int FILTER_SIZE = 5;
     Filter<float, FILTER_SIZE> moving_average;
-    moving_average.SetCoefficients(num, den);
+    moving_average.SetCoefficients(num, den,FILTER_SIZE);
 
     std::cout << "Selected filter is moving average(5)" << std::endl;
 
