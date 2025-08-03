@@ -108,7 +108,16 @@ TEST(PublicAPITests,SetCoefficientsFromZTransform_InitializationsAreCorrect) {
  * 
  */
 TEST(PublicAPITests,SetCoefficientsFromZTransform_HandlesDivideByZero) {
-    // TBD
+    // Test values are computed properly
+    constexpr unsigned int N = 5;
+    FilterTestHelper<float,N> test_filter;
+
+    // Assign numerator & denominator
+    float num[N] = {1.0f, 2.0f, 3.0f, 4.0f, 5.0f};
+    float den[N] = {0.0f, -2.0f, -3.0f, -4.0f, -5.0f};
+
+    EXPECT_NO_THROW(test_filter.SetCoefficientsFromZTransform(num,den));
+    
 }
 
 /**
