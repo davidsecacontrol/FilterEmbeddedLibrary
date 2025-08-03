@@ -171,3 +171,28 @@ TEST(PublicAPITests,InitialziationTest_SetState) {
         ASSERT_FLOAT_EQ(output_state[i],output_copied[i]);
     }
 }
+
+/**
+ * @brief Tests ClearState() resets properly to 0
+ * 
+ */
+TEST(PublicAPITests,InitialziationTest_ClearState) {
+    // Test values are computed properly
+    constexpr unsigned int N = 5;
+    FilterTestHelper<float,N> test_filter;
+
+    // Assign numerator & denominator
+    float input_state[N] = {1.0f, 2.0f, 3.0f, 4.0f, 5.0f};
+    float output_state[N] = {-1.0f, -2.0f, -3.0f, -4.0f, -5.0f};
+
+    test_filter.SetState(input_state,output_state);
+    test_filter.ClearState();
+    // Check inputs & outputs copy is correct
+    float* input_copied = test_filter.GetInputState();
+    float* output_copied = test_filter.GetOutputState();
+    
+    for(unsigned int i = 0; i < N ; i++){
+        ASSERT_FLOAT_EQ(0.0f,input_copied[i]);
+        ASSERT_FLOAT_EQ(0.0f,output_copied[i]);
+    }
+}
