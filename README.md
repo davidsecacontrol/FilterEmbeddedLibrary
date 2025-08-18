@@ -41,7 +41,7 @@ For development, this repository uses CMake. It is already configured for the [C
 This repository uses doxygen. For Windows, run `doxygen Doxyfile`.
 
 ## Future Updates
-This repository is also a learning experience. The expected roadmap is:
+The expected roadmap is:
 - [X] Add variable filter size
 - [X] Remove dynamic allocation
 - [X] Add template for filtering variable type
